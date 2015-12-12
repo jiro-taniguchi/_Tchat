@@ -13,7 +13,7 @@ class Serveur(Thread):
     def __init__(self):
         Thread.__init__(self)
         self.boucle = 1
-        self.con=0
+        self.data=0
         self.envoi=0
 
     def run(self):
@@ -51,20 +51,21 @@ class Serveur(Thread):
 
             for client in client_a_lire:
 
+                self.data=client.recv(1024)
+                if self.data == b'fin':
+                    client.close()
+                    client_conecter.remove(client)
+
+                if self.data != "\n" and self.data!= "":
+                    for pigeon in client_conecter:
+                        if pigeon != client:
+                            pigeon.send(self.data)
+                    print("[+] Message : {0}".format(self.data.decode()))
 
 
 
-                self.con=client.recv(1024)
-
-                self.con = self.con.decode()
-                if self.con != "\n" and self.con!="":
-                    print("[+] Message : {0}".format(self.con))
 
 
-
-
-        for client in client_a_lire:
-            client.close()
         s.close()
 
 def ChargeOther(box,message,who="Client"):
