@@ -1,8 +1,8 @@
 __author__ = 'kinkazma'
-import tkinter
-import Threadclient
+
+from Thread.Threadclient import *
 global ip, port
-Clients = Threadclient.Client("127.0.0.1")
+Clients = Client("127.0.0.1")
 Clients.start()
 
 def toot():
@@ -81,7 +81,7 @@ chatlog = tkinter.Text(main, bd=0, bg="grey", height="8", width="50", font="Aria
 chatlog.insert(tkinter.END, "Setup connection !\n")
 chatlog.config(state=tkinter.DISABLED)
 
-Actuchatlog = Threadclient.ReloadEntry(chatlog,Clients)
+Actuchatlog = ReloadEntry(chatlog,Clients)
 Actuchatlog.start()
 
 # Creation des widget button et saisie

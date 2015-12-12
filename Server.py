@@ -1,6 +1,6 @@
 __author__ = 'kinkazma'
 
-from Threadserver import *
+from Thread.Threadserver import *
 
 Server =Serveur()
 Server.start()
